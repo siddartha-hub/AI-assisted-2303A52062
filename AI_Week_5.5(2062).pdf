@@ -1,0 +1,240 @@
+#write the two python codes for checking prime numbers 1)Naive approach(basic)2)Optimized approach.explain how the optimized version improves performance.it should give propercomments and proper output.
+# Naive approach to check for prime number
+"""def is_prime_naive(n):
+    #Check if a number is prime using the naive approach.
+
+    #Parameters:
+    #n (int): The number to be checked.
+
+    #Returns:
+    #bool: True if n is prime, False otherwise.
+    if n <= 1:
+        return False
+    for i in range(2, n):
+        if n % i == 0:
+            return False
+    return True
+# Optimized approach to check for prime number
+def is_prime_optimized(n):
+    #Check if a number is prime using the optimized approach.
+
+    #Parameters:
+    #n (int): The number to be checked.
+
+    #Returns:
+    #bool: True if n is prime, False otherwise.
+    if n <= 1:
+        return False
+    if n <= 3:
+        return True
+    if n % 2 == 0 or n % 3 == 0:
+        return False
+    i = 5
+    while i * i <= n:
+        if n % i == 0 or n % (i + 2) == 0:
+            return False
+        i += 6
+    return True 
+# Accept user input
+number = int(input("Enter a number to check if it is prime: "))
+# Check using naive approach
+if is_prime_naive(number):
+    print(f"{number} is a prime number (Naive Approach).")
+else:
+    print(f"{number} is not a prime number (Naive Approach).")
+# Check using optimized approach
+if is_prime_optimized(number):
+    print(f"{number} is a prime number (Optimized Approach).")
+else:
+    print(f"{number} is not a prime number (Optimized Approach).")
+# Explanation of performance improvement
+explanation = 
+""""""Algorithm Performance Improvement:
+The naive approach checks for factors from 2 to n-1, resulting in a time complexity of O(n). The optimized approach reduces the number of checks significantly by:
+1. Eliminating even numbers and multiples of 3 right away.
+2. Only checking for factors up to the square root of n.
+This reduces the time complexity to O(√n), making it much more efficient for larger numbers"""
+
+"""print(explanation)"""  
+
+#write a python program to calculate the fibonacci series in recursive function.add clear comments explaining recursion.explain base cases and recursive calls.with properoutput
+"""def fibonacci(n):
+    #Calculate the nth Fibonacci number using recursion.
+
+    #Parameters:
+    #n (int): The position in the Fibonacci series.
+
+    #Returns:
+    #int: The nth Fibonacci number.
+
+    # Base case: The first two Fibonacci numbers are defined as 0 and 1
+    if n == 0:
+        return 0
+    elif n == 1:
+        return 1
+    else:
+        # Recursive case: The nth Fibonacci number is the sum of the (n-1)th and (n-2)th Fibonacci numbers
+        return fibonacci(n - 1) + fibonacci(n - 2)
+# Accept user input for the number of terms
+terms = int(input("Enter the number of terms in the Fibonacci series: "))
+print("Fibonacci Series:")
+for i in range(terms):
+    print(fibonacci(i), end=" ")
+"""
+# Explanation of recursion
+"""explanation = 
+""""""Recursion Explanation:
+Recursion is a programming technique where a function calls itself to solve smaller instances of the same problem. In the Fibonacci function:
+1. Base Cases: We define the first two Fibonacci numbers (0 and 1) to stop the recursion.
+2. Recursive Calls: For any number greater than 1, the function calls itself twice to compute the two preceding Fibonacci numbers and sums them up.
+This approach breaks down the problem into smaller subproblems until it reaches the base cases, allowing us to build the solution back up.""""""
+print(explanation)"""
+
+"""def read_and_process_file(filename):
+    
+    """#This function reads a text file and processes numeric data from it.
+    #Each line in the file is expected to contain one integer."""
+    
+
+"""try:
+        # Attempt to open the file in read mode
+        file = open(filename, "r")
+
+        total = 0
+        count = 0
+
+        # Read the file line by line
+        for line in file:
+            # Remove whitespace and newline characters
+            line = line.strip()
+
+            # Convert line to integer
+            # This may raise a ValueError if the data is not a valid number
+            number = int(line)
+
+            total += number
+            count += 1
+
+        file.close()
+
+        # Check to avoid division by zero
+        if count == 0:
+            raise ZeroDivisionError("File contains no numeric data")
+
+        # Processed result (average of numbers)
+        average = total / count
+        print("Average:", average)
+
+    except FileNotFoundError:
+        # Raised when the file does not exist
+        print("Error: The file was not found.")
+
+    except ValueError:
+        # Raised when a line cannot be converted to an integer
+        print("Error: File contains non-numeric data.")
+
+    except ZeroDivisionError as e:
+        # Raised when attempting to divide by zero
+        print("Error:", e)
+
+    except PermissionError:
+        # Raised when file exists but access is denied
+        print("Error: Permission denied while accessing the file.")
+
+    except Exception as e:
+        # Catches any unexpected errors
+        print("Unexpected error occurred:", e)
+
+    finally:
+        # This block always executes, whether an error occurs or not
+        print("File processing completed.")"""
+
+#Generate a Python-based login system that securely authenticates usersThe system should avoid plain-text passwords, use password hashing, and include basic input validation such as checking empty inputs and password length
+"""import hashlib
+def hash_password(password):
+    #Hash a password using SHA-256.
+
+    #Parameters:
+    #password (str): The plain-text password to be hashed.
+
+    #Returns:
+    #str: The hashed password.
+    return hashlib.sha256(password.encode()).hexdigest()
+def validate_input(username, password):
+    #Validate user input for username and password.
+
+    #Parameters:
+    #username (str): The username input.
+    #password (str): The password input.
+
+    #Returns:
+    #bool: True if inputs are valid, False otherwise.
+    if not username or not password:
+        return False
+    if len(password) < 8:
+        return False
+    return True
+def authenticate_user(username, password, user_db):
+    #Authenticate a user against a user database.
+
+    #Parameters:
+    #username (str): The username input.
+    #password (str): The password input.
+    #user_db (dict): A dictionary with usernames as keys and hashed passwords as values.
+
+    #Returns:
+    #bool: True if authentication is successful, False otherwise.
+    if username in user_db:
+        hashed_input_password = hash_password(password)
+        if user_db[username] == hashed_input_password:
+            return True
+    return False
+# Sample user database with hashed passwords
+user_database = {
+    "user1": hash_password("securePassword123"),
+    "user2": hash_password("anotherSecurePass456")
+}
+# Accept user input for login
+input_username = input("Enter username: ")
+input_password = input("Enter password: ")
+# Validate input
+if validate_input(input_username, input_password):
+    # Authenticate user
+    if authenticate_user(input_username, input_password, user_database):
+        print("Login successful!")
+    else:
+        print("Invalid username or password.")
+else:
+    print("Invalid input. Please ensure username and password are not empty and password is at least 8 characters long.")"""
+
+#Generate a Python script that logs user activity such as username, IP address, and timestamp.Ensure the logging follows privacy-aware practices by minimizing sensitive data and applying anonymization or masking where necessary
+import logging
+from datetime import datetime
+def mask_ip(ip_address):
+    #Mask the last octet of an IP address for privacy.
+
+    #Parameters:
+    #ip_address (str): The original IP address.
+
+    #Returns:
+    #str: The masked IP address.
+    parts = ip_address.split('.')
+    if len(parts) == 4:
+        parts[-1] = 'XXX'  # Mask the last octet
+        return '.'.join(parts)
+    return ip_address  # Return original if not a valid IP format
+# Configure logging
+logging.basicConfig(filename='user_activity.log', level=logging.INFO, format='%(asctime)s - %(message)s')
+def log_user_activity(username, ip_address):
+    #Log user activity with masked IP address and timestamp.
+
+    #Parameters:
+    #username (str): The username of the user.
+    #ip_address (str): The IP address of the user.
+    masked_ip = mask_ip(ip_address)
+    logging.info(f"User: {username}, IP: {masked_ip}")
+# Example usage
+user_name = input("Enter your username: ")
+user_ip = input("Enter your IP address: ")
+log_user_activity(user_name, user_ip)
+print("User activity logged successfully.")
